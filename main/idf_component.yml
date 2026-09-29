@@ -1,0 +1,16 @@
+dependencies:
+  espressif/esp_hosted:
+    rules:
+    - if: target == esp32p4
+    version: ^2.12.0
+  espressif/esp_wifi_remote:
+    rules:
+    - if: target == esp32p4
+    version: '*'
+  idf: '>=6.0.0,<6.1.0'
+  signalk-espos/espos_core:
+    version: ^0.12.1
+  signalk-espos/espos_ota:
+    version: ^0.12.1
+  signalk-espos/espos_sk:
+    version: ^0.12.1

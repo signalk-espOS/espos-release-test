@@ -1,0 +1,26 @@
+# Test fixture for espOS's reusable release-firmware.yml: exercises the build,
+# release, browser mirror and backfill against a real repository.
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release to build and publish (vX.Y.Z); the release must exist"
+        required: false
+      backfill:
+        description: "Existing releases to mirror without rebuilding"
+        required: false
+
+jobs:
+  firmware:
+    uses: signalk-espOS/espOS/.github/workflows/release-firmware.yml@feat/shared-release-workflow
+    permissions:
+      contents: write
+    with:
+      name: espos-release-test
+      builds: '[{"target": "esp32c6"}, {"target": "esp32"}]'
+      tag: ${{ inputs.tag }}
+      backfill: ${{ inputs.backfill }}
+    secrets:
+      signing_key: ${{ secrets.SIGNING_KEY_PEM }}
